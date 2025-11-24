@@ -1,0 +1,90 @@
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\main.dart
+       ERRORS:
+       Analyzing main.dart...    error - main.dart:28:46 - The name 'SplashScreen' isn't a class. Try correcting the name to match an existing class. - creation_with_non_type  1 issue found.
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\config\app_colors.dart
+       ERRORS:
+       Analyzing app_colors.dart... No issues found!
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\config\app_theme.dart
+       ERRORS:
+       Analyzing app_theme.dart... No issues found!
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\config\constants.dart
+       ERRORS:
+       Analyzing constants.dart... No issues found!
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\models\chat_message.dart
+       ERRORS:
+       Analyzing chat_message.dart... No issues found!
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\models\onboarding_slide.dart
+       ERRORS:
+       Analyzing onboarding_slide.dart... No issues found!
+[EMPTY] C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\models\template.dart
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\models\user.dart
+       ERRORS:
+       Analyzing user.dart... No issues found!
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\models\workflow.dart
+       ERRORS:
+       Analyzing workflow.dart... No issues found!
+[EMPTY] C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\chat_overlay.dart
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\chat_page.dart
+       ERRORS:
+       Analyzing chat_page.dart... No issues found!
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\profile_page.dart
+       ERRORS:
+       Analyzing profile_page.dart...    error - profile_page.dart:221:19 - The argument type 'Object' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable   error - profile_page.dart:228:19 - The argument type 'Object' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable   error - profile_page.dart:287:25 - The argument type 'Object' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable   error - profile_page.dart:292:25 - The argument type 'Object' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable  4 issues found.
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\settings_page.dart
+       ERRORS:
+       Analyzing settings_page.dart... No issues found!
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\site_builder_page.dart
+       ERRORS:
+       Analyzing site_builder_page.dart... No issues found!
+[EMPTY] C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\splash_screen.dart
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\workflow_manager_page.dart
+       ERRORS:
+       Analyzing workflow_manager_page.dart... No issues found!
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\onboarding\onboarding_screen.dart
+       ERRORS:
+       Analyzing onboarding_screen.dart...    error - onboarding_screen.dart:208:25 - The method 'PageIndicators' isn't defined for the type '_OnboardingScreenState'. Try correcting the name to the name of an existing method, or defining a method named 'PageIndicators'. - undefined_method warning - onboarding_screen.dart:5:8 - Unused import: '../../utils/custom_icons.dart'. Try removing the import directive. - unused_import warning - onboarding_screen.dart:7:8 - Unused import: '../../widgets/page_indicators.dart'. Try removing the import directive. - unused_import  3 issues found.
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\onboarding\onboarding_slide1.dart
+       ERRORS:
+       Analyzing onboarding_slide1.dart...  warning - onboarding_slide1.dart:4:8 - Unused import: '../../utils/animations.dart'. Try removing the import directive. - unused_import  1 issue found.
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\onboarding\onboarding_slide2.dart
+       ERRORS:
+       Analyzing onboarding_slide2.dart...  warning - onboarding_slide2.dart:4:8 - Unused import: '../../utils/animations.dart'. Try removing the import directive. - unused_import  1 issue found.
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\onboarding\onboarding_slide3.dart
+       ERRORS:
+       Analyzing onboarding_slide3.dart...  warning - onboarding_slide3.dart:4:8 - Unused import: '../../utils/animations.dart'. Try removing the import directive. - unused_import  1 issue found.
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\onboarding\onboarding_slide4.dart
+       ERRORS:
+       Analyzing onboarding_slide4.dart...  warning - onboarding_slide4.dart:4:8 - Unused import: '../../utils/animations.dart'. Try removing the import directive. - unused_import  1 issue found.
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\pages\onboarding\onboarding_slide5.dart
+       ERRORS:
+       Analyzing onboarding_slide5.dart...  warning - onboarding_slide5.dart:4:8 - Unused import: '../../utils/animations.dart'. Try removing the import directive. - unused_import  1 issue found.
+[EMPTY] C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\routes\app_routes.dart
+[EMPTY] C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\services\ai_service.dart
+[EMPTY] C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\services\chat_service.dart
+[EMPTY] C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\services\offline_storage_service.dart
+[EMPTY] C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\services\sync_service.dart
+[EMPTY] C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\services\workflow_service.dart
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\utils\animations.dart
+       ERRORS:
+       Analyzing animations.dart... No issues found!
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\utils\custom_icons.dart
+       ERRORS:
+       Analyzing custom_icons.dart...  warning - custom_icons.dart:1:8 - Unused import: 'package:flutter/material.dart'. Try removing the import directive. - unused_import  1 issue found.
+[EMPTY] C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\utils\extensions.dart
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\widgets\animated_button.dart
+       ERRORS:
+       Analyzing animated_button.dart... No issues found!
+[EMPTY] C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\widgets\bottom_nav_bar.dart
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\widgets\chat_bubble.dart
+       ERRORS:
+       Analyzing chat_bubble.dart... No issues found!
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\widgets\floating_ai_icon.dart
+       ERRORS:
+       Analyzing floating_ai_icon.dart... No issues found!
+[EMPTY] C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\widgets\page_indicators.dart
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\widgets\template_card.dart
+       ERRORS:
+       Analyzing template_card.dart... No issues found!
+[CODE]  C:\Users\Admin\Desktop\VETTO AI\vetto_ai\lib\widgets\workflow_card.dart
+       ERRORS:
+       Analyzing workflow_card.dart... No issues found!
