@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vetto_ai/config/app_colors.dart';
 import 'package:vetto_ai/config/constants.dart';
-import 'package:vetto_ai/utils/animations.dart';
 
 class AnimatedButton extends StatefulWidget {
   final String text;
@@ -10,6 +9,8 @@ class AnimatedButton extends StatefulWidget {
   final bool isLoading;
   final IconData? icon;
   final double width;
+  final Color? backgroundColor;
+  final Color? textColor;
   
   const AnimatedButton({
     super.key,
@@ -19,6 +20,8 @@ class AnimatedButton extends StatefulWidget {
     this.isLoading = false,
     this.icon,
     this.width = double.infinity,
+    this.backgroundColor,
+    this.textColor,
   });
   
   @override
@@ -29,25 +32,18 @@ class _AnimatedButtonState extends State<AnimatedButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
-  late Animation<double> _glowAnimation;
+  bool _isPressed = false;
   
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: AppAnimations.medium,
+      duration: const Duration(milliseconds: 150),
       vsync: this,
     );
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 0.95,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
-    _glowAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.easeInOut,
@@ -61,52 +57,54 @@ class _AnimatedButtonState extends State<AnimatedButton>
   }
   
   void _onTapDown(TapDownDetails details) {
+    setState(() => _isPressed = true);
     _controller.forward();
   }
   
   void _onTapUp(TapUpDetails details) {
+    setState(() => _isPressed = false);
     _controller.reverse();
-    widget.onPressed();
+    if (!widget.isLoading) {
+      widget.onPressed();
+    }
   }
   
   void _onTapCancel() {
+    setState(() => _isPressed = false);
     _controller.reverse();
   }
   
   Color _getButtonColor() {
+    if (widget.backgroundColor != null) return widget.backgroundColor!;
+    
     switch (widget.type) {
       case ButtonType.primary:
-        return AppColors.neonCyan;
+        return Colors.white; // White button like Vetto Wallet
       case ButtonType.secondary:
-        return AppColors.neonPurple;
+        return Colors.transparent;
       case ButtonType.success:
-        return AppColors.neonGreen;
+        return Colors.white;
     }
   }
   
   Color _getTextColor() {
+    if (widget.textColor != null) return widget.textColor!;
+    
     switch (widget.type) {
       case ButtonType.primary:
+        return AppColors.backgroundDark; // Dark text on white button
       case ButtonType.secondary:
+        return Colors.white;
       case ButtonType.success:
         return AppColors.backgroundDark;
     }
   }
   
-  List<BoxShadow> _getGlowShadows() {
-    final color = _getButtonColor();
-    return [
-      BoxShadow(
-        color: color.withValues(alpha: 0.6),
-        blurRadius: 8,
-        spreadRadius: 2,
-      ),
-      BoxShadow(
-        color: color.withValues(alpha: 0.3),
-        blurRadius: 16,
-        spreadRadius: 4,
-      ),
-    ];
+  Border? _getBorder() {
+    if (widget.type == ButtonType.secondary) {
+      return Border.all(color: Colors.white, width: 1.5);
+    }
+    return null;
   }
   
   @override
@@ -117,81 +115,64 @@ class _AnimatedButtonState extends State<AnimatedButton>
       onTapCancel: _onTapCancel,
       child: ScaleTransition(
         scale: _scaleAnimation,
-        child: AnimatedBuilder(
-          animation: _glowAnimation,
-          builder: (context, child) {
-            return Container(
-              width: widget.width,
-              height: 56,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    _getButtonColor(),
-                    _getButtonColor().withValues(alpha: 0.8),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          width: widget.width,
+          height: 56,
+          decoration: BoxDecoration(
+            color: _getButtonColor(),
+            borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
+            border: _getBorder(),
+            // NO GLOW SHADOWS - Clean like Vetto Wallet
+            boxShadow: _isPressed 
+                ? [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.1),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                : [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.1),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
                   ],
-                ),
-                borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
-                boxShadow: _getGlowShadows(),
-              ),
-              child: Stack(
-                children: [
-                  // Pulsing glow effect
-                  if (_glowAnimation.value > 0)
-                    Positioned.fill(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
-                          gradient: RadialGradient(
-                            center: Alignment.center,
-                            radius: 1.5,
-                            colors: [
-                              _getButtonColor().withValues(alpha: 0.3 * _glowAnimation.value),
-                              Colors.transparent,
-                            ],
-                          ),
+          ),
+          child: Center(
+            child: widget.isLoading
+                ? SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation(_getTextColor()),
+                    ),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (widget.icon != null) ...[
+                        Icon(
+                          widget.icon,
+                          color: _getTextColor(),
+                          size: AppConstants.iconSizeM,
+                        ),
+                        const SizedBox(width: AppConstants.spacingS),
+                      ],
+                      Text(
+                        widget.text,
+                        style: TextStyle(
+                          color: _getTextColor(),
+                          fontSize: AppConstants.fontSizeM,
+                          fontWeight: FontWeight.w700, // Bolder like Vetto Wallet
+                          letterSpacing: 1.1,
                         ),
                       ),
-                    ),
-                  
-                  // Content
-                  Center(
-                    child: widget.isLoading
-                        ? SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation(_getTextColor()),
-                            ),
-                          )
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              if (widget.icon != null) ...[
-                                Icon(
-                                  widget.icon,
-                                  color: _getTextColor(),
-                                  size: AppConstants.iconSizeM,
-                                ),
-                                const SizedBox(width: AppConstants.spacingS),
-                              ],
-                              Text(
-                                widget.text,
-                                style: TextStyle(
-                                  color: _getTextColor(),
-                                  fontSize: AppConstants.fontSizeM,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
+                    ],
                   ),
-                ],
-              ),
-            );
-          },
+          ),
         ),
       ),
     );

@@ -111,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage>
       decoration: BoxDecoration(
         gradient: AppColors.cardGradient,
         borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
-        boxShadow: AppColors.neonGlow(AppColors.neonCyan),
+        // boxShadow: AppColors.neonGlow(AppColors.neonCyan),
       ),
       child: Row(
         children: [
@@ -120,10 +120,10 @@ class _ProfilePageState extends State<ProfilePage>
               Container(
                 width: 80,
                 height: 80,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: AppColors.primaryGradient,
-                  boxShadow: AppColors.neonGlow(AppColors.neonCyan),
+                  // boxShadow: AppColors.neonGlow(AppColors.neonCyan),
                 ),
                 child: const Icon(
                   Icons.person,
@@ -147,9 +147,6 @@ class _ProfilePageState extends State<ProfilePage>
                       color: AppColors.backgroundDark,
                       width: 2,
                     ),
-                    boxShadow: _user.isOnline 
-                        ? AppColors.neonGlow(AppColors.neonGreen)
-                        : [],
                   ),
                 ),
               ),
@@ -187,121 +184,122 @@ class _ProfilePageState extends State<ProfilePage>
   }
   
   Widget _buildStatsGrid() {
-    const stats = [
-      {'label': 'Workflows', 'value': '42', 'color': AppColors.neonCyan},
-      {'label': 'AI Suggestions', 'value': '128', 'color': AppColors.neonPurple},
-      {'label': 'Active Tasks', 'value': '7', 'color': AppColors.oliveGold},
-      {'label': 'Templates', 'value': '15', 'color': AppColors.neonGreen},
-    ];
-    
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: AppConstants.spacingM,
-        mainAxisSpacing: AppConstants.spacingM,
-        childAspectRatio: 1.2,
+  const stats = [
+    {'label': 'Workflows', 'value': '42', 'color': AppColors.neonCyan},
+    {'label': 'AI Suggestions', 'value': '128', 'color': AppColors.neonPurple},
+    {'label': 'Active Tasks', 'value': '7', 'color': AppColors.oliveGold},
+    {'label': 'Templates', 'value': '15', 'color': AppColors.neonGreen},
+  ];
+
+  return GridView.builder(
+    shrinkWrap: true,
+    physics: const NeverScrollableScrollPhysics(),
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+      crossAxisSpacing: AppConstants.spacingM,
+      mainAxisSpacing: AppConstants.spacingM,
+      childAspectRatio: 1.2,
+    ),
+    itemCount: stats.length,
+    itemBuilder: (context, index) {
+      final stat = stats[index];
+      return HoverAnimationBuilder(
+        child: Container(
+          padding: AppConstants.paddingCard,
+          decoration: BoxDecoration(
+            gradient: AppColors.cardGradient,
+            borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
+            
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                stat['value']!.toString(), // <-- cast to String
+                style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                      color: stat['color'] as Color,
+                    ),
+              ),
+              const SizedBox(height: AppConstants.spacingS),
+              Text(
+                stat['label']!.toString(), // <-- cast to String
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+Widget _buildRecentActivity() {
+  final activities = [
+    {'action': 'Workflow completed', 'time': '2 min ago', 'icon': Icons.verified_user},
+    {'action': 'AI suggestion received', 'time': '15 min ago', 'icon': Icons.auto_awesome},
+    {'action': 'Template created', 'time': '1 hour ago', 'icon': Icons.dashboard},
+    {'action': 'Chat session started', 'time': '3 hours ago', 'icon': Icons.chat},
+  ];
+
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'Recent Activity',
+        style: Theme.of(context).textTheme.headlineMedium,
       ),
-      itemCount: stats.length,
-      itemBuilder: (context, index) {
-        final stat = stats[index];
-        return HoverAnimationBuilder(
-          child: Container(
-            padding: AppConstants.paddingCard,
-            decoration: BoxDecoration(
-              gradient: AppColors.cardGradient,
-              borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
-              boxShadow: AppColors.neonGlow(stat['color'] as Color),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  stat['value']!,
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                    color: stat['color'] as Color,
-                  ),
+      const SizedBox(height: AppConstants.spacingL),
+      ...activities.map((activity) {
+        return Container(
+          margin: const EdgeInsets.only(bottom: AppConstants.spacingM),
+          padding: AppConstants.paddingCard,
+          decoration: BoxDecoration(
+            color: AppColors.cardBackground,
+            borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppColors.neonCyan.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(AppConstants.borderRadiusM),
                 ),
-                const SizedBox(height: AppConstants.spacingS),
-                Text(
-                  stat['label']!,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
-                  textAlign: TextAlign.center,
+                child: Icon(
+                  activity['icon'] as IconData,
+                  color: AppColors.neonCyan,
+                  size: AppConstants.iconSizeM,
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(width: AppConstants.spacingM),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      activity['action']!.toString(), // <-- cast to String
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    const SizedBox(height: AppConstants.spacingXS),
+                    Text(
+                      activity['time']!.toString(), // <-- cast to String
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: AppColors.textTertiary),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         );
-      },
-    );
-  }
-  
-  Widget _buildRecentActivity() {
-    final activities = [
-      {'action': 'Workflow completed', 'time': '2 min ago', 'icon': Icons.verified_user},
-      {'action': 'AI suggestion received', 'time': '15 min ago', 'icon': Icons.auto_awesome},
-      {'action': 'Template created', 'time': '1 hour ago', 'icon': Icons.dashboard},
-      {'action': 'Chat session started', 'time': '3 hours ago', 'icon': Icons.chat},
-    ];
-    
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Recent Activity',
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
-        const SizedBox(height: AppConstants.spacingL),
-        ...activities.map((activity) {
-          return Container(
-            margin: const EdgeInsets.only(bottom: AppConstants.spacingM),
-            padding: AppConstants.paddingCard,
-            decoration: BoxDecoration(
-              color: AppColors.cardBackground,
-              borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: AppColors.neonCyan.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(AppConstants.borderRadiusM),
-                  ),
-                  child: Icon(
-                    activity['icon'] as IconData,
-                    color: AppColors.neonCyan,
-                    size: AppConstants.iconSizeM,
-                  ),
-                ),
-                const SizedBox(width: AppConstants.spacingM),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        activity['action']!,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const SizedBox(height: AppConstants.spacingXS),
-                      Text(
-                        activity['time']!,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textTertiary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
-        }),
-      ],
-    );
-  }
+      }),
+    ],
+  );
+}
 }

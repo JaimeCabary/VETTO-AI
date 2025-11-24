@@ -389,7 +389,7 @@ class _WorkflowManagerPageState extends State<WorkflowManagerPage> {
       decoration: BoxDecoration(
         gradient: AppColors.cardGradient,
         borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
-        boxShadow: AppColors.neonGlow(AppColors.neonCyan),
+        // boxShadow: AppColors.neonGlow(AppColors.neonCyan),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -568,7 +568,7 @@ class _WorkflowManagerPageState extends State<WorkflowManagerPage> {
         decoration: BoxDecoration(
           gradient: AppColors.cardGradient,
           borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
-          boxShadow: AppColors.neonGlow(AppColors.neonPurple),
+          // boxShadow: AppColors.neonGlow(AppColors.neonPurple),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

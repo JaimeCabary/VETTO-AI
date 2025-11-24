@@ -90,7 +90,7 @@ class _SettingsPageState extends State<SettingsPage> {
       decoration: BoxDecoration(
         gradient: AppColors.cardGradient,
         borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
-        boxShadow: AppColors.neonGlow(AppColors.neonPurple),
+        // boxShadow: AppColors.neonGlow(AppColors.neonPurple),
       ),
       child: Column(
         children: [
@@ -134,7 +134,7 @@ class _SettingsPageState extends State<SettingsPage> {
       decoration: BoxDecoration(
         gradient: AppColors.cardGradient,
         borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
-        boxShadow: AppColors.neonGlow(AppColors.neonGreen),
+        // boxShadow: AppColors.neonGlow(AppColors.neonGreen),
       ),
       child: Column(
         children: [
@@ -178,7 +178,7 @@ class _SettingsPageState extends State<SettingsPage> {
       decoration: BoxDecoration(
         gradient: AppColors.cardGradient,
         borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
-        boxShadow: AppColors.neonGlow(AppColors.oliveGold),
+        // boxShadow: AppColors.neonGlow(AppColors.oliveGold),
       ),
       child: Column(
         children: [
@@ -216,7 +216,7 @@ class _SettingsPageState extends State<SettingsPage> {
       decoration: BoxDecoration(
         gradient: AppColors.cardGradient,
         borderRadius: BorderRadius.circular(AppConstants.borderRadiusL),
-        boxShadow: AppColors.neonGlow(AppColors.neonCyan),
+        // boxShadow: AppColors.neonGlow(AppColors.neonCyan),
       ),
       child: Column(
         children: [
