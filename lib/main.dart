@@ -1,4 +1,96 @@
 
+// // import 'package:flutter/material.dart';
+// // import 'package:vetto_ai/config/app_theme.dart';
+// // import 'package:vetto_ai/pages/onboarding/onboarding_screen.dart';
+// // import 'package:vetto_ai/pages/splash_screen.dart';
+// // import 'package:vetto_ai/pages/profile_page.dart';
+// // import 'package:vetto_ai/pages/chat_page.dart';
+// // import 'package:vetto_ai/pages/workflow_manager_page.dart';
+// // import 'package:vetto_ai/pages/site_builder_page.dart';
+// // import 'package:vetto_ai/widgets/bottom_nav_bar.dart';
+// // // import 'package:vetto_ai/widgets/floating_ai_icon.dart';
+
+// // void main() {
+// //   runApp(const VettoAIApp());
+// // }
+
+// // class VettoAIApp extends StatelessWidget {
+// //   const VettoAIApp({super.key});
+
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     return MaterialApp(
+// //       title: 'Vetto AI',
+// //       theme: AppTheme.darkTheme,
+// //       debugShowCheckedModeBanner: false,
+// //       initialRoute: AppRoutes.onboarding,
+// //       routes: {
+// //         AppRoutes.onboarding: (context) => const OnboardingScreen(),
+// //         AppRoutes.splash: (context) => const SplashScreen(),
+// //         AppRoutes.main: (context) => const MainWrapper(),
+// //       },
+// // //       builder: (context, child) {
+// // //   // Check if current route is onboarding and hide floating icon
+// // //   final isOnboarding = ModalRoute.of(context)?.settings.name == AppRoutes.onboarding;
+  
+// // //   return Stack(
+// // //     children: [
+// // //       child!,
+// // //       if (!isOnboarding) // Only show on non-onboarding pages
+// // //         const Positioned(
+// // //           right: 20,
+// // //           bottom: 100,
+// // //           child: FloatingAiIcon(),
+// // //         ),
+// // //     ],
+// // //   );
+// // // },
+// //     );
+// //   }
+// // }
+
+// // class AppRoutes {
+// //   static const String onboarding = '/';
+// //   static const String splash = '/splash';
+// //   static const String main = '/main';
+// // }
+
+// // class MainWrapper extends StatefulWidget {
+// //   const MainWrapper({super.key});
+
+// //   @override
+// //   State<MainWrapper> createState() => _MainWrapperState();
+// // }
+
+// // class _MainWrapperState extends State<MainWrapper> {
+// //   int _currentIndex = 0;
+
+// //   final List<Widget> _pages = const [
+// //     WorkflowManagerPage(),
+// //     ChatPage(),
+// //     SiteBuilderPage(),
+// //     ProfilePage(),
+// //   ];
+
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     return Scaffold(
+// //       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+// //       body: _pages[_currentIndex],
+// //       bottomNavigationBar: BottomNavBar(
+// //         currentIndex: _currentIndex,
+// //         onTap: (index) {
+// //           setState(() {
+// //             _currentIndex = index;
+// //           });
+// //         },
+// //       ),
+// //     );
+// //   }
+// // }
+
+
+
 // import 'package:flutter/material.dart';
 // import 'package:vetto_ai/config/app_theme.dart';
 // import 'package:vetto_ai/pages/onboarding/onboarding_screen.dart';
@@ -8,6 +100,8 @@
 // import 'package:vetto_ai/pages/workflow_manager_page.dart';
 // import 'package:vetto_ai/pages/site_builder_page.dart';
 // import 'package:vetto_ai/widgets/bottom_nav_bar.dart';
+// // Add this to your imports in lib/main.dart
+// import 'package:vetto_ai/pages/settings_page.dart';
 // // import 'package:vetto_ai/widgets/floating_ai_icon.dart';
 
 // void main() {
@@ -23,36 +117,44 @@
 //       title: 'Vetto AI',
 //       theme: AppTheme.darkTheme,
 //       debugShowCheckedModeBanner: false,
-//       initialRoute: AppRoutes.onboarding,
+//       initialRoute: AppRoutes.splash, // splash is now the starting route
 //       routes: {
-//         AppRoutes.onboarding: (context) => const OnboardingScreen(),
 //         AppRoutes.splash: (context) => const SplashScreen(),
+//         AppRoutes.onboarding: (context) => const OnboardingScreen(),
 //         AppRoutes.main: (context) => const MainWrapper(),
+//         AppRoutes.profile: (context) => const ProfilePage(),
+//         AppRoutes.chat: (context) => const ChatPage(),
+//         AppRoutes.workflows: (context) => const WorkflowManagerPage(),
+//         AppRoutes.siteBuilder: (context) => const SiteBuilderPage(),
 //       },
-// //       builder: (context, child) {
-// //   // Check if current route is onboarding and hide floating icon
-// //   final isOnboarding = ModalRoute.of(context)?.settings.name == AppRoutes.onboarding;
-  
-// //   return Stack(
-// //     children: [
-// //       child!,
-// //       if (!isOnboarding) // Only show on non-onboarding pages
-// //         const Positioned(
-// //           right: 20,
-// //           bottom: 100,
-// //           child: FloatingAiIcon(),
-// //         ),
-// //     ],
-// //   );
-// // },
+//       // Uncomment if you want floating icon on non-onboarding screens
+//       // builder: (context, child) {
+//       //   final isOnboarding = ModalRoute.of(context)?.settings.name == AppRoutes.onboarding;
+//       //   return Stack(
+//       //     children: [
+//       //       child!,
+//       //       if (!isOnboarding)
+//       //         const Positioned(
+//       //           right: 20,
+//       //           bottom: 100,
+//       //           child: FloatingAiIcon(),
+//       //         ),
+//       //     ],
+//       //   );
+//       // },
 //     );
 //   }
 // }
 
 // class AppRoutes {
-//   static const String onboarding = '/';
-//   static const String splash = '/splash';
-//   static const String main = '/main';
+//   static const String splash = '/';
+//   static const String onboarding = '/onboarding';
+//   static const String profile = '/profile';
+//   static const String chat = '/chat';
+//   static const String settings = '/settings';
+//   static const String workflows = '/workflows';
+//   static const String siteBuilder = '/site-builder';
+//   static const String main = '/main'; // kept for MainWrapper
 // }
 
 // class MainWrapper extends StatefulWidget {
@@ -70,10 +172,123 @@
 //     ChatPage(),
 //     SiteBuilderPage(),
 //     ProfilePage(),
+//     SettingsPage(),    
 //   ];
 
 //   @override
 //   Widget build(BuildContext context) {
+//     assert(_pages.length == 5, 'Pages list must match BottomNavBar items count.');
+//     return Scaffold(
+//       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+//       body: _pages[_currentIndex],
+//       bottomNavigationBar: BottomNavBar(
+//         currentIndex: _currentIndex,
+//         onTap: (index) {
+//           setState(() {
+//             _currentIndex = index;
+//           });
+//         },
+//       ),
+//     );
+//   }
+// }
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:vetto_ai/config/app_theme.dart';
+// import 'package:vetto_ai/pages/onboarding/onboarding_screen.dart';
+// import 'package:vetto_ai/pages/splash_screen.dart';
+// import 'package:vetto_ai/pages/profile_page.dart';
+// import 'package:vetto_ai/pages/chat_page.dart';
+// import 'package:vetto_ai/pages/workflow_manager_page.dart';
+// import 'package:vetto_ai/pages/site_builder_page.dart';
+// import 'package:vetto_ai/widgets/bottom_nav_bar.dart';
+// import 'package:vetto_ai/pages/settings_page.dart';
+// // Add the EnvService import
+// import 'package:vetto_ai/services/env_service.dart';
+
+// void main() async {
+//   // Required because we are doing async work (loading env) before runApp
+//   WidgetsFlutterBinding.ensureInitialized();
+
+//   // Initialize the Environment Service (loads .env)
+//   await EnvService().initialize();
+
+//   runApp(const VettoAIApp());
+// }
+
+// class VettoAIApp extends StatelessWidget {
+//   const VettoAIApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Vetto AI',
+//       theme: AppTheme.darkTheme,
+//       debugShowCheckedModeBanner: false,
+//       initialRoute: AppRoutes.splash, // splash is now the starting route
+//       routes: {
+//         AppRoutes.splash: (context) => const SplashScreen(),
+//         AppRoutes.onboarding: (context) => const OnboardingScreen(),
+//         AppRoutes.main: (context) => const MainWrapper(),
+//         AppRoutes.profile: (context) => const ProfilePage(),
+//         AppRoutes.chat: (context) => const ChatPage(),
+//         AppRoutes.workflows: (context) => const WorkflowManagerPage(),
+//         AppRoutes.siteBuilder: (context) => const SiteBuilderPage(),
+//       },
+//       // Uncomment if you want floating icon on non-onboarding screens
+//       // builder: (context, child) {
+//       //   final isOnboarding = ModalRoute.of(context)?.settings.name == AppRoutes.onboarding;
+//       //   return Stack(
+//       //     children: [
+//       //       child!,
+//       //       if (!isOnboarding)
+//       //         const Positioned(
+//       //           right: 20,
+//       //           bottom: 100,
+//       //           child: FloatingAiIcon(),
+//       //         ),
+//       //     ],
+//       //   );
+//       // },
+//     );
+//   }
+// }
+
+// class AppRoutes {
+//   static const String splash = '/';
+//   static const String onboarding = '/onboarding';
+//   static const String profile = '/profile';
+//   static const String chat = '/chat';
+//   static const String settings = '/settings';
+//   static const String workflows = '/workflows';
+//   static const String siteBuilder = '/site-builder';
+//   static const String main = '/main'; // kept for MainWrapper
+// }
+
+// class MainWrapper extends StatefulWidget {
+//   const MainWrapper({super.key});
+
+//   @override
+//   State<MainWrapper> createState() => _MainWrapperState();
+// }
+
+// class _MainWrapperState extends State<MainWrapper> {
+//   int _currentIndex = 0;
+
+//   final List<Widget> _pages = const [
+//     WorkflowManagerPage(),
+//     ChatPage(),
+//     SiteBuilderPage(),
+//     ProfilePage(),
+//     SettingsPage(),    
+//   ];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     assert(_pages.length == 5, 'Pages list must match BottomNavBar items count.');
 //     return Scaffold(
 //       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 //       body: _pages[_currentIndex],
@@ -100,11 +315,12 @@ import 'package:vetto_ai/pages/chat_page.dart';
 import 'package:vetto_ai/pages/workflow_manager_page.dart';
 import 'package:vetto_ai/pages/site_builder_page.dart';
 import 'package:vetto_ai/widgets/bottom_nav_bar.dart';
-// Add this to your imports in lib/main.dart
 import 'package:vetto_ai/pages/settings_page.dart';
-// import 'package:vetto_ai/widgets/floating_ai_icon.dart';
+import 'package:vetto_ai/services/env_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EnvService().initialize();
   runApp(const VettoAIApp());
 }
 
@@ -117,7 +333,7 @@ class VettoAIApp extends StatelessWidget {
       title: 'Vetto AI',
       theme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.splash, // splash is now the starting route
+      initialRoute: AppRoutes.splash,
       routes: {
         AppRoutes.splash: (context) => const SplashScreen(),
         AppRoutes.onboarding: (context) => const OnboardingScreen(),
@@ -127,21 +343,6 @@ class VettoAIApp extends StatelessWidget {
         AppRoutes.workflows: (context) => const WorkflowManagerPage(),
         AppRoutes.siteBuilder: (context) => const SiteBuilderPage(),
       },
-      // Uncomment if you want floating icon on non-onboarding screens
-      // builder: (context, child) {
-      //   final isOnboarding = ModalRoute.of(context)?.settings.name == AppRoutes.onboarding;
-      //   return Stack(
-      //     children: [
-      //       child!,
-      //       if (!isOnboarding)
-      //         const Positioned(
-      //           right: 20,
-      //           bottom: 100,
-      //           child: FloatingAiIcon(),
-      //         ),
-      //     ],
-      //   );
-      // },
     );
   }
 }
@@ -154,7 +355,7 @@ class AppRoutes {
   static const String settings = '/settings';
   static const String workflows = '/workflows';
   static const String siteBuilder = '/site-builder';
-  static const String main = '/main'; // kept for MainWrapper
+  static const String main = '/main';
 }
 
 class MainWrapper extends StatefulWidget {
@@ -178,9 +379,73 @@ class _MainWrapperState extends State<MainWrapper> {
   @override
   Widget build(BuildContext context) {
     assert(_pages.length == 5, 'Pages list must match BottomNavBar items count.');
+    
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: _pages[_currentIndex],
+      // We set this to transparent because we are creating a custom background Stack
+      backgroundColor: Colors.transparent,
+      extendBody: true, // Allows background to flow behind the BottomNavBar
+      
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // --- 1. PREMIUM DARK BACKGROUND BASE ---
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xFF121212), // Deep Charcoal
+                  Color(0xFF000000), // Obsidian Black
+                ],
+              ),
+            ),
+          ),
+
+          // --- 2. RADIAL SPOTLIGHT ---
+          Positioned(
+            top: -200,
+            left: -200,
+            child: Container(
+              width: 600,
+              height: 600,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    Colors.white.withValues(alpha: 0.07), // Soft matte sheen
+                    Colors.transparent,
+                  ],
+                  stops: const [0.0, 1.0],
+                ),
+              ),
+            ),
+          ),
+
+          // --- 3. GEOMETRIC TYPOGRAPHY TEXTURE ---
+          // Massive, cropped typography for depth
+          Positioned(
+            bottom: -50,
+            right: -20,
+            child: IgnorePointer( // Ensures clicks pass through to the pages
+              child: Text(
+                "VETTO",
+                style: TextStyle(
+                  fontSize: 180,
+                  fontWeight: FontWeight.w900, // Heavy geometric weight
+                  color: Colors.white.withValues(alpha: 0.02), // 2-3% opacity
+                  letterSpacing: -10.0, // Tight kerning
+                  height: 1.0,
+                ),
+              ),
+            ),
+          ),
+
+          // --- 4. ACTIVE PAGE CONTENT ---
+          _pages[_currentIndex],
+        ],
+      ),
+      
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentIndex,
         onTap: (index) {

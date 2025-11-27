@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import 'dart:math' as math;
 
 class VettoScaffold extends StatefulWidget {
   final Widget body;
   final Widget? bottomNavigationBar;
   final Widget? floatingActionButton;
   final PreferredSizeWidget? appBar;
-  
-  // FIX 1: Removed space between useSafe and Area
-  final bool useSafeArea; 
+  final bool useSafeArea;
 
   const VettoScaffold({
     super.key,
@@ -17,8 +14,7 @@ class VettoScaffold extends StatefulWidget {
     this.bottomNavigationBar,
     this.floatingActionButton,
     this.appBar,
-    // FIX 2: Corrected parameter name
-    this.useSafeArea = true, 
+    this.useSafeArea = true,
   });
 
   @override
@@ -31,7 +27,7 @@ class _VettoScaffoldState extends State<VettoScaffold> with SingleTickerProvider
   @override
   void initState() {
     super.initState();
-    // Slow rotation for background doodles
+    // Keeping your original slow rotation
     _controller = AnimationController(
       duration: const Duration(seconds: 20),
       vsync: this,
@@ -46,79 +42,103 @@ class _VettoScaffoldState extends State<VettoScaffold> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
+    // 1. The Deep Charcoal Base
+    const Color deepCharcoal = Color(0xFF121212);
+
     return Scaffold(
+      backgroundColor: deepCharcoal,
       extendBodyBehindAppBar: true,
       appBar: widget.appBar,
       bottomNavigationBar: widget.bottomNavigationBar,
       floatingActionButton: widget.floatingActionButton,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          // DARKER VETTO GRADIENT
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF2F3A2F), // Dark Olive
-              Color(0xFF1A211A), // Almost Black Green
-            ],
+      body: Stack(
+        children: [
+          // --- LAYER 1: The "Sheen" Gradient ---
+          // Creates the matte spotlight effect from top-left
+          Container(
+            decoration: const BoxDecoration(
+              gradient: RadialGradient(
+                center: Alignment(-0.8, -0.6),
+                radius: 1.5,
+                colors: [
+                  Color(0xFF2A2A2A), // Matte Sheen
+                  deepCharcoal,            // Deep Base
+                ],
+                stops: [0.0, 1.0],
+              ),
+            ),
           ),
-        ),
-        child: Stack(
-          children: [
-            // --- 1. Top Right Doodle (SVG) ---
-            Positioned(
-              top: -50,
-              right: -50,
-              child: Opacity(
-                opacity: 0.05, // Very subtle/opaque
-                child: RotationTransition(
-                  turns: _controller,
-                  child: SvgPicture.asset(
-                    'assets/images/undraw_connected-world_anke.svg',
-                    width: 300,
-                    colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                  ),
-                ),
-              ),
-            ),
 
-            // --- 2. Bottom Left Doodle (SVG) ---
-            Positioned(
-              bottom: 100,
-              left: -30,
-              child: Opacity(
-                opacity: 0.05,
-                child: Transform.rotate(
-                  angle: -0.2,
-                  child: SvgPicture.asset(
-                    'assets/images/undraw_chat_qmyo.svg', // Using one of your chat SVGs
-                    width: 250,
-                    colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                  ),
+          // --- LAYER 2: The Giant "V" Texture ---
+          // Replaces generic patterns with bold branding
+          Positioned(
+            right: -80,
+            top: -60,
+            child: IgnorePointer(
+              child: Text(
+                'V',
+                style: TextStyle(
+                  fontSize: 600, 
+                  fontWeight: FontWeight.w900,
+                  color: Colors.white.withValues(alpha: 0.03), // Subtle texture
+                  height: 1.0,
                 ),
               ),
             ),
+          ),
 
-            // --- 3. Mid-Right 3D Element (Static) ---
-            Positioned(
-              top: 300,
-              right: -20,
-              child: Opacity(
-                opacity: 0.03,
-                child: Image.asset(
-                  'assets/images/3dgraphics/image-keoWINYYBgXx7vwibZe2cbllJ4SaQA.png', // 3D Mascot
-                  width: 150,
+          // --- LAYER 3: YOUR ORIGINAL DOODLES (Restored) ---
+          
+          // Top Right Rotating Doodle
+          Positioned(
+            top: 500,
+            right: 50,
+            child: Opacity(
+              opacity: 0.05, 
+              child: RotationTransition(
+                turns: _controller,
+                child: SvgPicture.asset(
+                  'assets/images/undraw_connected-world_anke.svg',
+                  width: 120,
+                  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                 ),
               ),
             ),
-            
-            // --- Main Content ---
-            // FIX 3: Corrected variable usage
-            widget.useSafeArea ? SafeArea(child: widget.body) : widget.body,
-          ],
-        ),
+          ),
+
+          // Bottom Left Doodle
+          Positioned(
+            bottom: 100,
+            left: -30,
+            child: Opacity(
+              opacity: 0.05,
+              child: Transform.rotate(
+                angle: -0.2,
+                child: SvgPicture.asset(
+                  'assets/images/undraw_chat_qmyo.svg',
+                  width: 250,
+                  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                ),
+              ),
+            ),
+          ),
+
+          // Mid-Right 3D Element
+          Positioned(
+            top: 300,
+            right: -20,
+            child: Opacity(
+              opacity: 0.03,
+              child: Image.asset(
+                'assets/images/3dgraphics/image-keoWINYYBgXx7vwibZe2cbllJ4SaQA.png',
+                width: 150,
+              ),
+            ),
+          ),
+
+          // --- LAYER 4: Content ---
+          widget.useSafeArea ? SafeArea(child: widget.body) : widget.body,
+        ],
       ),
     );
   }
