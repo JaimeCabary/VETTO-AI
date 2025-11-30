@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:vetto_ai/widgets/page_indicators.dart';
+// import 'package:uruella_ai/widgets/page_indicators.dart';
 // import '../../config/app_colors.dart';
 // import '../../config/constants.dart';
 // import '../../models/onboarding_slide.dart';
@@ -323,7 +323,7 @@
 
 // import 'package:flutter/material.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:vetto_ai/widgets/page_indicators.dart';
+// import 'package:uruella_ai/widgets/page_indicators.dart';
 // import '../../config/app_colors.dart';
 // import '../../config/constants.dart';
 // import '../../models/onboarding_slide.dart';
@@ -750,7 +750,7 @@
 import 'dart:ui'; // Required for BackdropFilter
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:vetto_ai/widgets/page_indicators.dart';
+// import 'package:uruella_ai/widgets/page_indicators.dart';
 // import '../../config/app_colors.dart';
 // import '../../config/constants.dart';
 // import '../../models/onboarding_slide.dart';

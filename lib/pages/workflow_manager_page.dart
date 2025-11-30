@@ -3,7 +3,7 @@
 // // import 'dart:ui';
 // // import 'package:flutter/material.dart';
 // // import 'package:flutter_svg/flutter_svg.dart';
-// // // import 'package:vetto_ai/widgets/vetto_scaffold.dart'; // Removed to fix error
+// // // import 'package:uruella_ai/widgets/vetto_scaffold.dart'; // Removed to fix error
 
 // // // --- 1. MODELS ---
 
@@ -992,7 +992,7 @@
 // import 'dart:ui';
 // import 'package:flutter/material.dart';
 // // import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:vetto_ai/widgets/vetto_scaffold.dart';
+// import 'package:uruella_ai/widgets/vetto_scaffold.dart';
 
 // // --- 1. MODELS ---
 
@@ -1315,7 +1315,7 @@
 //         children: [
 //           // Minimalist Label
 //           const Text(
-//             "VETTO // WORKFLOWS",
+//             "URUELLA // WORKFLOWS",
 //             style: TextStyle(
 //               fontSize: 12,
 //               fontWeight: FontWeight.w700,
@@ -1942,7 +1942,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vetto_ai/widgets/vetto_scaffold.dart';
+import 'package:uruella_ai/widgets/vetto_scaffold.dart';
 
 // --- 1. MODELS ---
 
@@ -2183,7 +2183,7 @@ class _WorkflowManagerPageState extends State<WorkflowManagerPage> with TickerPr
             bottom: -80,
             right: -40,
             child: Text(
-              "VETTO",
+              "URUELLA",
               style: TextStyle(
                 fontSize: 180,
                 fontWeight: FontWeight.w900,
@@ -2269,7 +2269,7 @@ class _WorkflowManagerPageState extends State<WorkflowManagerPage> with TickerPr
         children: [
           // Minimalist Label
           const Text(
-            "VETTO // WORKFLOWS",
+            "URUELLA // WORKFLOWS",
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,

@@ -1,8 +1,8 @@
 // // import 'package:flutter/material.dart';
-// // import 'package:vetto_ai/config/app_colors.dart';
-// // import 'package:vetto_ai/config/constants.dart';
-// // import 'package:vetto_ai/models/chat_message.dart';
-// // import 'package:vetto_ai/utils/animations.dart';
+// // import 'package:uruella_ai/config/app_colors.dart';
+// // import 'package:uruella_ai/config/constants.dart';
+// // import 'package:uruella_ai/models/chat_message.dart';
+// // import 'package:uruella_ai/utils/animations.dart';
 
 // // class ChatBubble extends StatefulWidget {
 // //   final ChatMessage message;
@@ -270,7 +270,7 @@
 
 
 // import 'package:flutter/material.dart';
-// import 'package:vetto_ai/models/chat_message.dart';
+// import 'package:uruella_ai/models/chat_message.dart';
 
 // class ChatBubble extends StatelessWidget {
 //   final ChatMessage message;
@@ -394,7 +394,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:vetto_ai/models/chat_message.dart';
+import 'package:uruella_ai/models/chat_message.dart';
 
 class ChatBubble extends StatelessWidget {
   final ChatMessage message;

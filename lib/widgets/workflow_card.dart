@@ -1,8 +1,8 @@
 // // import 'package:flutter/material.dart';
-// // import 'package:vetto_ai/config/app_colors.dart';
-// // import 'package:vetto_ai/config/constants.dart';
-// // import 'package:vetto_ai/models/workflow.dart';
-// // import 'package:vetto_ai/utils/animations.dart';
+// // import 'package:uruella_ai/config/app_colors.dart';
+// // import 'package:uruella_ai/config/constants.dart';
+// // import 'package:uruella_ai/models/workflow.dart';
+// // import 'package:uruella_ai/utils/animations.dart';
 
 // // class WorkflowCard extends StatefulWidget {
 // //   final Workflow workflow;
@@ -193,9 +193,9 @@
 // // }
 
 // import 'package:flutter/material.dart';
-// import 'package:vetto_ai/config/app_colors.dart';
-// import 'package:vetto_ai/config/constants.dart';
-// import 'package:vetto_ai/models/workflow.dart';
+// import 'package:uruella_ai/config/app_colors.dart';
+// import 'package:uruella_ai/config/constants.dart';
+// import 'package:uruella_ai/models/workflow.dart';
 
 // class WorkflowCard extends StatelessWidget {
 //   final Workflow workflow;
@@ -333,7 +333,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:vetto_ai/models/workflow.dart';
+import 'package:uruella_ai/models/workflow.dart';
 
 class WorkflowCard extends StatelessWidget {
   final Workflow workflow;

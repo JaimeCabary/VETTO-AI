@@ -623,8 +623,8 @@
 
 // // import 'dart:ui';
 // import 'package:flutter/material.dart';
-// import 'package:vetto_ai/widgets/glass_card.dart';
-// import 'package:vetto_ai/widgets/vetto_scaffold.dart';
+// import 'package:uruella_ai/widgets/glass_card.dart';
+// import 'package:uruella_ai/widgets/vetto_scaffold.dart';
 
 // class SettingsPage extends StatefulWidget {
 //   const SettingsPage({super.key});
@@ -928,7 +928,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:vetto_ai/widgets/vetto_scaffold.dart';
+import 'package:uruella_ai/widgets/vetto_scaffold.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -1257,7 +1257,7 @@ class _SettingsPageState extends State<SettingsPage> with SingleTickerProviderSt
                 const SizedBox(height: 40),
                 Center(
                   child: Text(
-                    "VETTO AI v1.0.0",
+                    "URUELLA AI v1.0.0",
                     style: TextStyle(color: Colors.white.withValues(alpha: 0.2), fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 2.0),
                   ),
                 ),
@@ -1298,7 +1298,7 @@ class _SettingsPageState extends State<SettingsPage> with SingleTickerProviderSt
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            "VETTO // SETTINGS",
+            "URUELLA // SETTINGS",
             style: TextStyle(
               fontSize: 12, fontWeight: FontWeight.w700,
               color: Colors.white54, letterSpacing: 1.5,

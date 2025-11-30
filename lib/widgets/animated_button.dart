@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vetto_ai/config/app_colors.dart';
-import 'package:vetto_ai/config/constants.dart';
+import 'package:uruella_ai/config/app_colors.dart';
+import 'package:uruella_ai/config/constants.dart';
 
 class AnimatedButton extends StatefulWidget {
   final String text;

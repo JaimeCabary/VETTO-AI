@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:vetto_ai/config/app_colors.dart';
+import 'package:uruella_ai/config/app_colors.dart';
 
 enum WorkflowStatus {
   pending,

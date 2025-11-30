@@ -927,7 +927,7 @@ class _OnboardingSlide1State extends State<OnboardingSlide1> with SingleTickerPr
                 const SizedBox(height: AppConstants.spacingXL),
                 FadeTransition(
                   opacity: _titleAnimation,
-                  child: const Text('Welcome to Vetto AI', style: TextStyle(fontSize: AppConstants.fontSizeXXL, fontWeight: FontWeight.w800, color: Colors.white, height: 1.2), textAlign: TextAlign.center),
+                  child: const Text('Welcome to Uruella AI', style: TextStyle(fontSize: AppConstants.fontSizeXXL, fontWeight: FontWeight.w800, color: Colors.white, height: 1.2), textAlign: TextAlign.center),
                 ),
                 const SizedBox(height: AppConstants.spacingL),
                 FadeTransition(

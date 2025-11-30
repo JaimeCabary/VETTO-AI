@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:vetto_ai/pages/site_builder_page.dart';
+// import 'package:uruella_ai/pages/site_builder_page.dart';
 // import '../config/app_colors.dart';
 // import '../config/constants.dart';
 
@@ -205,7 +205,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:vetto_ai/pages/site_builder_page.dart';
+import 'package:uruella_ai/pages/site_builder_page.dart';
 
 class TemplateCard extends StatelessWidget {
   final WebsiteTemplate template;

@@ -1,4 +1,186 @@
+// // import 'dart:convert';
+// // // import 'dart:typed_data'; 
+// // import 'package:flutter/foundation.dart';
+// // import 'package:google_generative_ai/google_generative_ai.dart';
+// // import 'env_service.dart';
+
+// // class AIService {
+// //   static final AIService _instance = AIService._internal();
+// //   factory AIService() => _instance;
+// //   AIService._internal();
+
+// //   GenerativeModel? _model;
+  
+// //   // --- SYSTEM PROMPT ---
+// //   static const String _vettoSystemPrompt = '''
+// // You are Uruella AI, a next-generation, offline-first, platform-agnostic AI ecosystem.
+// // Your Mission: To provide every user, everywhere—regardless of infrastructure—with a powerful, private, and intelligent AI ecosystem.
+
+// // COMPANY PROFILE:
+// // Name: Uruella AI
+// // Founder/CEO: Shalom Chidi-Azuwike(Founder and CEO Software Engineer from Nigeria) and PraiseGod Chukwudiebube Clement (Brains, CMO, Businessman from Nigeria ) alongside Shalom's bestie Rain Kaludgan (CFO, Multifaceted Developer from Metro Manila)
+// // Founded: 2025Ni
+// // Headquarters: Port Harcourt, Rivers State, Nigeria
+// // Core Value Proposition: "Your AI Co-Pilot. Offline. Automated. Safe."
+
+// // KEY FEATURES:
+// // 1. Offline AI Co-Pilot: Runs locally, handles autocomplete/suggestions without internet.
+// // 2. Document Ecosystem: Manage, tag, and verify documents (tamper detection).
+// // 3. Workflow Automation: Automate tasks (e.g., "When PDF dropped -> verify -> tag").
+// // 4. Security: Local AES-256 encryption.
+
+// // BEHAVIORAL GUIDELINES:
+// // - Be helpful, professional, and privacy-conscious.
+// // - Answer questions based on Uruella's offline-first capabilities.
+// // - If asked about "workflows", "templates", or "automation", provide concrete examples.
+// // - Format responses cleanly. Use markdown for lists or code.
+// // - When providing code, use markdown code blocks (```language ... ```).
+// // ''';
+
+// //   Future<void> initialize() async {
+// //     if (_model != null) return;
+
+// //     try {
+// //       final apiKey = EnvService().geminiApiKey;
+      
+// //       _model = GenerativeModel(
+// //         // Using the stable 2.5 Flash model
+// //         model: 'gemini-2.5-flash', 
+// //         apiKey: apiKey,
+// //         systemInstruction: Content.system(_vettoSystemPrompt),
+// //         generationConfig: GenerationConfig(
+// //           temperature: 0.7,
+// //           topK: 40,
+// //           topP: 0.95,
+// //           maxOutputTokens: 2048,
+// //         ),
+// //       );
+// //     } catch (e) {
+// //       if (kDebugMode) {
+// //         print("AI Service Initialization Error: $e");
+// //       }
+// //     }
+// //   }
+
+// //   // Process user message with history AND Optional Image (Multimodal)
+// //   // backward compatible: if imageBytes is null, it acts like a normal text chat
+// //   Future<String> processMessage(String message, {List<Map<String, String>>? history, Uint8List? imageBytes}) async {
+// //     if (_model == null) await initialize();
+
+// //     try {
+// //       // 1. Prepare History
+// //       final chatHistory = history?.map((h) {
+// //         final role = h['role'] == 'user' ? 'user' : 'model';
+// //         return Content(role, [TextPart(h['content'] ?? '')]);
+// //       }).toList() ?? [];
+
+// //       final chat = _model!.startChat(history: chatHistory);
+      
+// //       // 2. Prepare Current Message (Text + Optional Image)
+// //       Content content;
+// //       if (imageBytes != null) {
+// //         // Multimodal Input: Text + Image
+// //         content = Content.multi([
+// //           TextPart(message),
+// //           DataPart('image/jpeg', imageBytes), // Defaults to jpeg context, Flash handles most types automatically
+// //         ]);
+// //       } else {
+// //         // Text Only Input
+// //         content = Content.text(message);
+// //       }
+
+// //       final response = await chat.sendMessage(content);
+
+// //       return response.text ?? "I'm having trouble connecting to my neural core. Please check your connection.";
+// //     } catch (e) {
+// //       if (e.toString().contains('404') || e.toString().contains('not found')) {
+// //          return "System Error: The 'gemini-2.5-flash' model is not currently available to your API key. Please check Google AI Studio.";
+// //       }
+// //       return "Error: Unable to process request. ($e)";
+// //     }
+// //   }
+
+// //   // --- NEW FEATURE: Data Extraction from Image ---
+// //   // Use this for "Scan this receipt" or "Extract JSON from this screenshot"
+// //   Future<String> extractDataFromImage(String prompt, Uint8List imageBytes) async {
+// //     if (_model == null) await initialize();
+// //     try {
+// //       final content = [
+// //         Content.multi([
+// //           TextPart(prompt),
+// //           DataPart('image/jpeg', imageBytes),
+// //         ])
+// //       ];
+
+// //       final response = await _model!.generateContent(content);
+// //       return response.text ?? "Could not extract data.";
+// //     } catch (e) {
+// //        return "Extraction Error: $e";
+// //     }
+// //   }
+
+// //   // Generate a short title for the chat based on the first message
+// //   Future<String> summarizeChat(String firstMessage) async {
+// //     if (_model == null) await initialize();
+// //     try {
+// //       final prompt = "Generate a very short, punchy title (max 4 words) for a chat that starts with this message: \"$firstMessage\". Return ONLY the title, no quotes.";
+// //       final response = await _model!.generateContent([Content.text(prompt)]);
+// //       return response.text?.trim() ?? "New Chat";
+// //     } catch (e) {
+// //       return "New Chat";
+// //     }
+// //   }
+
+// //   // Generate structured JSON for workflows
+// //   Future<List<Map<String, dynamic>>> getWorkflowSuggestions() async {
+// //     if (_model == null) await initialize();
+
+// //     try {
+// //       const prompt = '''
+// //       Generate 3 useful workflow automation ideas for a business user using Uruella AI.
+// //       Return strictly valid JSON in this format:
+// //       [{"id": "1", "title": "Title", "description": "Desc", "category": "Category"}]
+// //       Do not include markdown formatting like ```json.
+// //       ''';
+
+// //       final response = await _model!.generateContent([Content.text(prompt)]);
+// //       final cleanText = response.text?.replaceAll('```json', '').replaceAll('```', '').trim();
+
+// //       if (cleanText != null) {
+// //         final List<dynamic> jsonList = jsonDecode(cleanText);
+// //         return List<Map<String, dynamic>>.from(jsonList);
+// //       }
+// //     } catch (e) {
+// //       if (kDebugMode) {
+// //         print("JSON Generation Error: $e");
+// //       }
+// //     }
+    
+// //     return [
+// //       {
+// //         'id': '1',
+// //         'title': 'Document Integrity Scan',
+// //         'description': 'Automatically scan new PDFs for deepfake artifacts',
+// //         'category': 'Security',
+// //       },
+// //       {
+// //         'id': '2',
+// //         'title': 'Meeting Notes Sync',
+// //         'description': 'Transcribe local audio and tag action items',
+// //         'category': 'Productivity',
+// //       },
+// //       {
+// //         'id': '3',
+// //         'title': 'Invoice Auto-Sort',
+// //         'description': 'Detect invoices and move to Finance folder',
+// //         'category': 'Automation',
+// //       },
+// //     ];
+// //   }
+// // }
+
 // import 'dart:convert';
+// // import 'dart:typed_data'; 
 // import 'package:flutter/foundation.dart';
 // import 'package:google_generative_ai/google_generative_ai.dart';
 // import 'env_service.dart';
@@ -12,25 +194,24 @@
   
 //   // --- SYSTEM PROMPT ---
 //   static const String _vettoSystemPrompt = '''
-// You are Vetto AI, a next-generation, offline-first, platform-agnostic AI ecosystem.
+// You are Uruella AI, a next-generation, offline-first, platform-agnostic AI ecosystem.
 // Your Mission: To provide every user, everywhere—regardless of infrastructure—with a powerful, private, and intelligent AI ecosystem.
 
 // COMPANY PROFILE:
-// Name: Vetto AI
-// Founder/CEO: Shalom Chidi-Azuwike
-// Founded: 2025
+// Name: Uruella AI
+// Founder/CEO: Shalom Chidi-Azuwike(Founder and CEO Software Engineer from Nigeria) and PraiseGod Chukwudiebube Clement (Brains, CMO, Businessman from Nigeria ) alongside Shalom's bestie Rain Kaludgan (CFO, Multifaceted Developer from Metro Manila)
+// Founded: 2025Ni
 // Headquarters: Port Harcourt, Rivers State, Nigeria
 // Core Value Proposition: "Your AI Co-Pilot. Offline. Automated. Safe."
 
 // KEY FEATURES:
 // 1. Offline AI Co-Pilot: Runs locally, handles autocomplete/suggestions without internet.
 // 2. Document Ecosystem: Manage, tag, and verify documents (tamper detection).
-// 3. Workflow Automation: Automate tasks (e.g., "When PDF dropped -> verify -> tag").
 // 4. Security: Local AES-256 encryption.
 
 // BEHAVIORAL GUIDELINES:
 // - Be helpful, professional, and privacy-conscious.
-// - Answer questions based on Vetto's offline-first capabilities.
+// - Answer questions based on Uruella's offline-first capabilities.
 // - If asked about "workflows", "templates", or "automation", provide concrete examples.
 // - Format responses cleanly. Use markdown for lists or code.
 // - When providing code, use markdown code blocks (```language ... ```).
@@ -40,10 +221,10 @@
 //     if (_model != null) return;
 
 //     try {
+//       // NOTE: Assuming EnvService().geminiApiKey exists and is correct
 //       final apiKey = EnvService().geminiApiKey;
       
 //       _model = GenerativeModel(
-//         // Using the stable 2.5 Flash model
 //         model: 'gemini-2.5-flash', 
 //         apiKey: apiKey,
 //         systemInstruction: Content.system(_vettoSystemPrompt),
@@ -61,31 +242,112 @@
 //     }
 //   }
 
-//   // Process user message with history
-//   Future<String> processMessage(String message, {List<Map<String, String>>? history}) async {
+//   // ⭐️ Core Streaming Method: Replaces the previous synchronous processMessage for chat ⭐️
+//   Stream<String> processMessageStream(
+//     String message, 
+//     {
+//       List<Map<String, String>>? history, 
+//       Uint8List? imageBytes
+//     }) async* {
 //     if (_model == null) await initialize();
+//     if (_model == null) {
+//       yield "Error: AI model not initialized. Check API Key.";
+//       return;
+//     }
 
 //     try {
-//       final chatHistory = history?.map((h) {
-//         final role = h['role'] == 'user' ? 'user' : 'model';
-//         return Content(role, [TextPart(h['content'] ?? '')]);
-//       }).toList() ?? [];
+//       // 1. Prepare Content List (History + Current Message)
+//       final List<Content> fullContent = [];
 
-//       final chat = _model!.startChat(history: chatHistory);
-//       final response = await chat.sendMessage(Content.text(message));
+//       // Add History (convert List<Map> to List<Content>)
+//       if (history != null) {
+//         fullContent.addAll(history.map((h) {
+//           final role = h['role'] == 'user' ? 'user' : 'model';
+//           return Content(role, [TextPart(h['content'] ?? '')]);
+//         }));
+//       }
+
+//       // Add Current Message (Text + Optional Image)
+//       List<Part> parts = [TextPart(message)];
+//       if (imageBytes != null) {
+//         parts.add(DataPart('image/jpeg', imageBytes));
+//       }
+//       fullContent.add(Content('user', parts));
+      
+//       // 2. Start the streaming generation
+//       final responseStream = _model!.generateContentStream(fullContent);
+
+//       // 3. Yield chunks as they arrive
+//       await for (final chunk in responseStream) {
+//         if (chunk.text != null) {
+//           yield chunk.text!;
+//         }
+//       }
+//     } catch (e) {
+//       yield "Error: Unable to process request. ($e)";
+//     }
+//   }
+
+
+//   // --- Utility Methods (kept synchronous for non-chat functions) ---
+  
+//   // Note: This is maintained but typically streaming is preferred for chat
+//   // If you only use processMessageStream, you can delete this.
+//   Future<String> processMessage(String message, {List<Map<String, String>>? history, Uint8List? imageBytes}) async {
+//     if (_model == null) await initialize();
+//     if (_model == null) return "Error: AI model not initialized.";
+
+//     try {
+//       final List<Content> fullContent = [];
+//       if (history != null) {
+//         fullContent.addAll(history.map((h) {
+//           final role = h['role'] == 'user' ? 'user' : 'model';
+//           return Content(role, [TextPart(h['content'] ?? '')]);
+//         }));
+//       }
+
+//       List<Part> parts = [TextPart(message)];
+//       if (imageBytes != null) {
+//         parts.add(DataPart('image/jpeg', imageBytes));
+//       }
+//       fullContent.add(Content('user', parts));
+
+//       final response = await _model!.generateContent(fullContent);
 
 //       return response.text ?? "I'm having trouble connecting to my neural core. Please check your connection.";
 //     } catch (e) {
 //       if (e.toString().contains('404') || e.toString().contains('not found')) {
-//          return "System Error: The 'gemini-2.5-flash' model is not currently available to your API key. Please check Google AI Studio.";
+//         return "System Error: The 'gemini-2.5-flash' model is not currently available to your API key. Please check Google AI Studio.";
 //       }
 //       return "Error: Unable to process request. ($e)";
 //     }
 //   }
 
-//   // Generate a short title for the chat based on the first message
+//   // Data Extraction (Synchronous, typically for backend utility)
+//   Future<String> extractDataFromImage(String prompt, Uint8List imageBytes) async {
+//     if (_model == null) await initialize();
+//     if (_model == null) return "Extraction Error: Model not ready.";
+
+//     try {
+//       final content = [
+//         Content.multi([
+//           TextPart(prompt),
+//           DataPart('image/jpeg', imageBytes),
+//         ])
+//       ];
+
+//       final response = await _model!.generateContent(content);
+//       return response.text ?? "Could not extract data.";
+//     } catch (e) {
+//       return "Extraction Error: $e";
+//     }
+//   }
+
+//   // Chat Summarization (Synchronous, utility)
 //   Future<String> summarizeChat(String firstMessage) async {
 //     if (_model == null) await initialize();
+//     if (_model == null) return "New Chat";
+
 //     try {
 //       final prompt = "Generate a very short, punchy title (max 4 words) for a chat that starts with this message: \"$firstMessage\". Return ONLY the title, no quotes.";
 //       final response = await _model!.generateContent([Content.text(prompt)]);
@@ -95,13 +357,14 @@
 //     }
 //   }
 
-//   // Generate structured JSON for workflows
+//   // Workflow Suggestions (Synchronous, utility)
 //   Future<List<Map<String, dynamic>>> getWorkflowSuggestions() async {
 //     if (_model == null) await initialize();
+//     if (_model == null) return [];
 
 //     try {
 //       const prompt = '''
-//       Generate 3 useful workflow automation ideas for a business user using Vetto AI.
+//       Generate 3 useful workflow automation ideas for a business user using Uruella AI.
 //       Return strictly valid JSON in this format:
 //       [{"id": "1", "title": "Title", "description": "Desc", "category": "Category"}]
 //       Do not include markdown formatting like ```json.
@@ -120,6 +383,7 @@
 //       }
 //     }
     
+//     // Fallback data
 //     return [
 //       {
 //         'id': '1',
@@ -160,25 +424,24 @@ class AIService {
   
   // --- SYSTEM PROMPT ---
   static const String _vettoSystemPrompt = '''
-You are Vetto AI, a next-generation, offline-first, platform-agnostic AI ecosystem.
+You are Uruella AI, a next-generation, offline-first, platform-agnostic AI ecosystem.
 Your Mission: To provide every user, everywhere—regardless of infrastructure—with a powerful, private, and intelligent AI ecosystem.
 
 COMPANY PROFILE:
-Name: Vetto AI
-Founder/CEO: Shalom Chidi-Azuwike
-Founded: 2025
-Headquarters: Port Harcourt, Rivers State, Nigeria
+Name: Uruella AI
+Founder/CEO: Shalom Chidi-Azuwike(Founder and CEO Software Engineer from Nigeria) and PraiseGod Chukwudiebube Clement (Brains, CMO, Businessman from Nigeria ) alongside Shalom's bestie Rain Kaludgan (CFO, Multifaceted Developer from Metro Manila)
+Founded: 2025Ni
+Headquarters: Maitama, Abuja - Federal Capital Territory, Nigeria
 Core Value Proposition: "Your AI Co-Pilot. Offline. Automated. Safe."
 
 KEY FEATURES:
 1. Offline AI Co-Pilot: Runs locally, handles autocomplete/suggestions without internet.
 2. Document Ecosystem: Manage, tag, and verify documents (tamper detection).
-3. Workflow Automation: Automate tasks (e.g., "When PDF dropped -> verify -> tag").
 4. Security: Local AES-256 encryption.
 
 BEHAVIORAL GUIDELINES:
 - Be helpful, professional, and privacy-conscious.
-- Answer questions based on Vetto's offline-first capabilities.
+- Answer questions based on Uruella's offline-first capabilities.
 - If asked about "workflows", "templates", or "automation", provide concrete examples.
 - Format responses cleanly. Use markdown for lists or code.
 - When providing code, use markdown code blocks (```language ... ```).
@@ -188,10 +451,11 @@ BEHAVIORAL GUIDELINES:
     if (_model != null) return;
 
     try {
+      // NOTE: Assuming EnvService().geminiApiKey exists and is correct
+      // This is now properly part of your file and should compile correctly.
       final apiKey = EnvService().geminiApiKey;
       
       _model = GenerativeModel(
-        // Using the stable 2.5 Flash model
         model: 'gemini-2.5-flash', 
         apiKey: apiKey,
         systemInstruction: Content.system(_vettoSystemPrompt),
@@ -209,48 +473,91 @@ BEHAVIORAL GUIDELINES:
     }
   }
 
-  // Process user message with history AND Optional Image (Multimodal)
-  // backward compatible: if imageBytes is null, it acts like a normal text chat
-  Future<String> processMessage(String message, {List<Map<String, String>>? history, Uint8List? imageBytes}) async {
+  // ⭐️ Core Streaming Method for typing effect ⭐️
+  Stream<String> processMessageStream(
+    String message, 
+    {
+      List<Map<String, String>>? history, 
+      Uint8List? imageBytes
+    }) async* {
     if (_model == null) await initialize();
+    if (_model == null) {
+      yield "Error: AI model not initialized. Check API Key.";
+      return;
+    }
 
     try {
-      // 1. Prepare History
-      final chatHistory = history?.map((h) {
-        final role = h['role'] == 'user' ? 'user' : 'model';
-        return Content(role, [TextPart(h['content'] ?? '')]);
-      }).toList() ?? [];
+      // 1. Prepare Content List (History + Current Message)
+      final List<Content> fullContent = [];
 
-      final chat = _model!.startChat(history: chatHistory);
-      
-      // 2. Prepare Current Message (Text + Optional Image)
-      Content content;
-      if (imageBytes != null) {
-        // Multimodal Input: Text + Image
-        content = Content.multi([
-          TextPart(message),
-          DataPart('image/jpeg', imageBytes), // Defaults to jpeg context, Flash handles most types automatically
-        ]);
-      } else {
-        // Text Only Input
-        content = Content.text(message);
+      // Add History (convert List<Map> to List<Content>)
+      if (history != null) {
+        fullContent.addAll(history.map((h) {
+          final role = h['role'] == 'user' ? 'user' : 'model';
+          return Content(role, [TextPart(h['content'] ?? '')]);
+        }));
       }
 
-      final response = await chat.sendMessage(content);
+      // Add Current Message (Text + Optional Image)
+      List<Part> parts = [TextPart(message)];
+      if (imageBytes != null) {
+        parts.add(DataPart('image/jpeg', imageBytes));
+      }
+      fullContent.add(Content('user', parts));
+      
+      // 2. Start the streaming generation
+      final responseStream = _model!.generateContentStream(fullContent);
+
+      // 3. Yield chunks as they arrive
+      await for (final chunk in responseStream) {
+        if (chunk.text != null) {
+          yield chunk.text!;
+        }
+      }
+    } catch (e) {
+      yield "Error: Unable to process request. ($e)";
+    }
+  }
+
+
+  // --- Utility Methods ---
+  
+  // Synchronous fallback (kept for completeness, though streaming is used for chat)
+  Future<String> processMessage(String message, {List<Map<String, String>>? history, Uint8List? imageBytes}) async {
+    if (_model == null) await initialize();
+    if (_model == null) return "Error: AI model not initialized.";
+
+    try {
+      final List<Content> fullContent = [];
+      if (history != null) {
+        fullContent.addAll(history.map((h) {
+          final role = h['role'] == 'user' ? 'user' : 'model';
+          return Content(role, [TextPart(h['content'] ?? '')]);
+        }));
+      }
+
+      List<Part> parts = [TextPart(message)];
+      if (imageBytes != null) {
+        parts.add(DataPart('image/jpeg', imageBytes));
+      }
+      fullContent.add(Content('user', parts));
+
+      final response = await _model!.generateContent(fullContent);
 
       return response.text ?? "I'm having trouble connecting to my neural core. Please check your connection.";
     } catch (e) {
       if (e.toString().contains('404') || e.toString().contains('not found')) {
-         return "System Error: The 'gemini-2.5-flash' model is not currently available to your API key. Please check Google AI Studio.";
+        return "System Error: The 'gemini-2.5-flash' model is not currently available to your API key. Please check Google AI Studio.";
       }
       return "Error: Unable to process request. ($e)";
     }
   }
 
-  // --- NEW FEATURE: Data Extraction from Image ---
-  // Use this for "Scan this receipt" or "Extract JSON from this screenshot"
+  // Data Extraction (Synchronous, typically for backend utility)
   Future<String> extractDataFromImage(String prompt, Uint8List imageBytes) async {
     if (_model == null) await initialize();
+    if (_model == null) return "Extraction Error: Model not ready.";
+
     try {
       final content = [
         Content.multi([
@@ -262,13 +569,15 @@ BEHAVIORAL GUIDELINES:
       final response = await _model!.generateContent(content);
       return response.text ?? "Could not extract data.";
     } catch (e) {
-       return "Extraction Error: $e";
+      return "Extraction Error: $e";
     }
   }
 
-  // Generate a short title for the chat based on the first message
+  // Chat Summarization (Synchronous, utility)
   Future<String> summarizeChat(String firstMessage) async {
     if (_model == null) await initialize();
+    if (_model == null) return "New Chat";
+
     try {
       final prompt = "Generate a very short, punchy title (max 4 words) for a chat that starts with this message: \"$firstMessage\". Return ONLY the title, no quotes.";
       final response = await _model!.generateContent([Content.text(prompt)]);
@@ -278,13 +587,14 @@ BEHAVIORAL GUIDELINES:
     }
   }
 
-  // Generate structured JSON for workflows
+  // Workflow Suggestions (Synchronous, utility)
   Future<List<Map<String, dynamic>>> getWorkflowSuggestions() async {
     if (_model == null) await initialize();
+    if (_model == null) return [];
 
     try {
       const prompt = '''
-      Generate 3 useful workflow automation ideas for a business user using Vetto AI.
+      Generate 3 useful workflow automation ideas for a business user using Uruella AI.
       Return strictly valid JSON in this format:
       [{"id": "1", "title": "Title", "description": "Desc", "category": "Category"}]
       Do not include markdown formatting like ```json.
@@ -303,6 +613,7 @@ BEHAVIORAL GUIDELINES:
       }
     }
     
+    // Fallback data
     return [
       {
         'id': '1',

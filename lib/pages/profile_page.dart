@@ -1,7 +1,7 @@
 // // // import 'dart:ui';
 // // import 'package:flutter/material.dart';
-// // import 'package:vetto_ai/widgets/glass_card.dart';
-// // import 'package:vetto_ai/widgets/vetto_scaffold.dart';
+// // import 'package:uruella_ai/widgets/glass_card.dart';
+// // import 'package:uruella_ai/widgets/vetto_scaffold.dart';
 
 // // // 1. Local User Model (to ensure code runs without external dependency)
 // // class User {
@@ -371,8 +371,8 @@
 // // import 'dart:ui';
 // import 'package:flutter/material.dart';
 // import 'package:shared_preferences/shared_preferences.dart'; // Import this
-// import 'package:vetto_ai/widgets/glass_card.dart';
-// import 'package:vetto_ai/widgets/vetto_scaffold.dart';
+// import 'package:uruella_ai/widgets/glass_card.dart';
+// import 'package:uruella_ai/widgets/vetto_scaffold.dart';
 
 // // 1. Local User Model
 // class User {
@@ -753,7 +753,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vetto_ai/widgets/vetto_scaffold.dart';
+import 'package:uruella_ai/widgets/vetto_scaffold.dart';
 
 // 1. Local User Model (PRESERVED)
 class User {
@@ -839,7 +839,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
   User _getMockUser({required String name}) {
     return User(
       name: name,
-      email: '${name.toLowerCase().replaceAll(' ', '.')}@vetto.ai',
+      email: '${name.toLowerCase().replaceAll(' ', '.')}@uruella.ai',
       isOnline: true,
       stats: const UserStats(
         workflowCompletions: 42,
@@ -970,7 +970,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       children: [
         // Minimalist Label
         const Text(
-          "VETTO // PROFILE",
+          "URUELLA // PROFILE",
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,

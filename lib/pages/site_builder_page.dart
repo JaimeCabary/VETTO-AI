@@ -805,11 +805,11 @@
 
 // // // // import 'dart:ui';
 // // // // import 'package:flutter/material.dart';
-// // // // // import 'package:vetto_ai/config/constants.dart';
-// // // // // import 'package:vetto_ai/widgets/animated_button.dart';
-// // // // import 'package:vetto_ai/widgets/glass_card.dart';
-// // // // import 'package:vetto_ai/widgets/template_card.dart';
-// // // // import 'package:vetto_ai/widgets/vetto_scaffold.dart';
+// // // // // import 'package:uruella_ai/config/constants.dart';
+// // // // // import 'package:uruella_ai/widgets/animated_button.dart';
+// // // // import 'package:uruella_ai/widgets/glass_card.dart';
+// // // // import 'package:uruella_ai/widgets/template_card.dart';
+// // // // import 'package:uruella_ai/widgets/vetto_scaffold.dart';
 
 // // // // class SiteBuilderPage extends StatefulWidget {
 // // // //   const SiteBuilderPage({super.key});
@@ -1331,8 +1331,8 @@
 
 // // // import 'dart:ui';
 // // // import 'package:flutter/material.dart';
-// // // import 'package:vetto_ai/widgets/glass_card.dart';
-// // // import 'package:vetto_ai/widgets/vetto_scaffold.dart';
+// // // import 'package:uruella_ai/widgets/glass_card.dart';
+// // // import 'package:uruella_ai/widgets/vetto_scaffold.dart';
 
 // // // // --- 1. MODEL ---
 // // // class WebsiteTemplate {
@@ -1900,7 +1900,7 @@
 
 // // // import 'dart:ui';
 // // import 'package:flutter/material.dart';
-// // import 'package:vetto_ai/widgets/vetto_scaffold.dart';
+// // import 'package:uruella_ai/widgets/vetto_scaffold.dart';
 
 // // // --- 1. MODEL ---
 // // class WebsiteTemplate {
@@ -2517,7 +2517,7 @@
 
 // import 'dart:ui';
 // import 'package:flutter/material.dart';
-// import 'package:vetto_ai/widgets/vetto_scaffold.dart';
+// import 'package:uruella_ai/widgets/vetto_scaffold.dart';
 
 // // --- 1. MODEL ---
 // class WebsiteTemplate {
@@ -3273,7 +3273,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:vetto_ai/widgets/vetto_scaffold.dart';
+import 'package:uruella_ai/widgets/vetto_scaffold.dart';
 
 // --- 1. MODEL ---
 class WebsiteTemplate {
@@ -3634,7 +3634,7 @@ class _SiteBuilderPageState extends State<SiteBuilderPage> with SingleTickerProv
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            "VETTO // SITE BUILDER",
+            "URUELLA // SITE BUILDER",
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,

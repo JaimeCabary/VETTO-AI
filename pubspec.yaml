@@ -1,4 +1,4 @@
-name: vetto_ai
+name: uruella_ai
 description: Offline-first AI ecosystem with cyberpunk aesthetic
 
 publish_to: 'none'
@@ -21,12 +21,14 @@ dependencies:
   speech_to_text: ^7.3.0 
   permission_handler: ^11.3.0 
   google_fonts: ^6.1.0
+  just_audio: ^0.9.36
+  # flutter_native_splash: ^2.3.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
-  flutter_launcher_icons: ^0.10.0
+  flutter_launcher_icons: 0.14.4
 
 
 
@@ -58,3 +60,21 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/images/loga.jpg"
+
+# flutter_native_splash:
+#   # This creates the background color (matches your Flutter Splash)
+#   color: "#FAFAFA" 
+  
+#   # Your logo file
+#   image: assets/images/logo.png
+  
+#   # Branding (Optional - Android 12+)
+#   branding: assets/images/logo.png
+  
+#   # Enforce full screen
+#   fullscreen: true
+  
+#   # Android 12 specific (Background usually needs to be lighter or same)
+#   android_12:
+#     image: assets/images/logo.png
+#     icon_background_color: "#FAFAFA"
